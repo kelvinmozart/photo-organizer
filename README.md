@@ -23,6 +23,7 @@ if __name__ == "__main__":
 ## Example
 After running the script, your photos will be organized into folders like:
 
+```
 Photos organized/
 ├── 2023-01/
 │   ├── photo1.jpg
