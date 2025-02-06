@@ -19,8 +19,8 @@ This script was created with the help of GitHub Copilot to organize your photos 
 if __name__ == "__main__":
     source_folder      = "C:/Example/Photos"            # Path of the folder with photos
     destination_folder = "C:/Example/Photos organized"  # Organized folder path
-
-Example
+```
+## Example
 After running the script, your photos will be organized into folders like:
 
 Photos organized/
