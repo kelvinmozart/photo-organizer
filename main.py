@@ -28,16 +28,28 @@ def ensure_folder_exists(folder_path):
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
 
+def create_folders(destination_folder):
+    """Creates necessary folders for organizing photos and videos."""
+    folders = {
+        "error_folder": os.path.join(destination_folder, "error_files"),
+        "video_folder": os.path.join(destination_folder, "Videos"),
+    }
+
+    for folder in folders.values():
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+
+    return folders
+
 def organize_photos_by_creation_date(source_folder, destination_folder):
     """" Organizes photos into folders based on the photo creation date """
 
     ensure_folder_exists(destination_folder)
 
-    error_folder = os.path.join(destination_folder, "error_files")
-    video_folder = os.path.join(destination_folder, "Videos")
-
-    ensure_folder_exists(error_folder)
-    ensure_folder_exists(video_folder)
+    # Create necessary folders and retrieve their paths
+    folders = create_folders(destination_folder)
+    error_folder = folders["error_folder"]
+    video_folder = folders["video_folder"]
 
     copied_files_count = 0
     error_files_count  = 0
@@ -48,6 +60,7 @@ def organize_photos_by_creation_date(source_folder, destination_folder):
     for root, _, files in os.walk(source_folder):
         for file in files:
             file_path = os.path.join(root, file)
+            file_extension = os.path.splitext(file)[1].lower()
 
             try:
                 # Check if the file is a video
@@ -56,6 +69,7 @@ def organize_photos_by_creation_date(source_folder, destination_folder):
                     print(f"Moved video: {file_path} -> {os.path.join(video_folder, file)}")
                     continue
 
+                # Process photo files
                 creation_date = get_photo_creation_date(file_path)
                 if creation_date is None:
                     exif_error_count += 1
@@ -68,11 +82,9 @@ def organize_photos_by_creation_date(source_folder, destination_folder):
                 target_folder = os.path.join(destination_folder, folder_name)
 
                 # Create the destination folder if necessary
-                if not os.path.exists(target_folder):
-                    os.makedirs(target_folder)
+                ensure_folder_exists(target_folder)
 
                 # Rename the file with a sequential counter
-                file_extension = os.path.splitext(file)[1]
                 new_file_name  = f"photo_{copied_files_count + 1:04d}{file_extension}"
                 target_path    = os.path.join(target_folder, new_file_name)
 
@@ -99,11 +111,11 @@ def organize_photos_by_creation_date(source_folder, destination_folder):
     
     print(f"Total files copied: {copied_files_count}")
     print(f"Total files with error: {error_files_count}")
-    print(f"Total files with EXIF ​​error: {exif_error_count}")
+    print(f"Total files with EXIF error: {exif_error_count}")
 
 if __name__ == "__main__":
-    source_folder      = "D:/backup notebook/Camera"            # Path of the folder with photos
-    destination_folder = "C:/Teste"  # Organized folder path
+    source_folder      = "D:/backup"            # Path of the folder with photos
+    destination_folder = "C:/Users/KELVIN/Pictures/Fotos"  # Organized folder path
 
     inicio = time.time()
     organize_photos_by_creation_date(source_folder, destination_folder)
