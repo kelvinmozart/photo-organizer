@@ -114,8 +114,8 @@ def organize_photos_by_creation_date(source_folder, destination_folder):
     print(f"Total files with EXIF error: {exif_error_count}")
 
 if __name__ == "__main__":
-    source_folder      = "D:/backup"            # Path of the folder with photos
-    destination_folder = "C:/Users/KELVIN/Pictures/Fotos"  # Organized folder path
+    source_folder      = "C:/Example/Photo"            # Path of the folder with photos
+    destination_folder = "C:/Example/Photo organized"  # Organized folder path
 
     inicio = time.time()
     organize_photos_by_creation_date(source_folder, destination_folder)
