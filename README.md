@@ -1,6 +1,6 @@
 # Photo Organizer
 
-This script was created with the help of GitHub Copilot to organize your photos into folders based on their creation date (month and year).
+This script was created with the help of GitHub Copilot to organize your photos into folders based on their creation date (month and year). It was my first time using Python in a personal project.
 
 ## Features
 
