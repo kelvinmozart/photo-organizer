@@ -16,9 +16,13 @@ This script was created with the help of GitHub Copilot to organize your photos 
 3. Run the script.
 
 ```python
-if __name__ == "__main__":
-    source_folder      = "C:/Example/Photos"            # Path of the folder with photos
-    destination_folder = "C:/Example/Photos organized"  # Organized folder path
+#Allow multiple source paths in photo organization
+sources = [
+        Path("C:/Example/Photos"),
+        Path("C:/Example/Photos 2")
+    ]
+
+destination = Path("C:/Example/Photos organized")  # Organized folder path
 ```
 ## Example
 After running the script, your photos will be organized into folders like:
