@@ -18,4 +18,4 @@ if __name__ == "__main__":
     for source in sources:
         organizer.organize_media(source, destination)
 
-    print(f"Exection time: {time.time() - inicio:.2f}s")
+    print(f"Execution time: {time.time() - inicio:.2f}s")
